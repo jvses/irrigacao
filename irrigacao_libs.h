@@ -13,6 +13,7 @@ public:
 
 //void setup_displays();
 
+void set_dig(byte digito, byte primeira_porta);
 void disp_num(byte n0, byte n1, byte n2,byte n3,byte var_check);
 
 void um(byte n0, byte n1, byte n2,byte n3);

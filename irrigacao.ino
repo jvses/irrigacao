@@ -64,6 +64,7 @@ void loop() {
 //  delay(300); // Wait for 300 millisecond(s)
 // }
 
+
 dt.disp_num(b0,b1,b2,b3,val); // exibe numero de val no display
 
 }

@@ -7,6 +7,35 @@
 //}
 
 
+void DISPLAY7s::set_dig(byte digito, byte primeira_porta){// essa função vai determinar qual algarismo do Display ele vai exibir
+//  Com isso posso controlar o que vejo em cada display separadamente.
+// recomendo colocar um delay pequeno entre cada troca de display pra dar tempo de resposta do CI CD4511
+  if(digito == primeira_porta){// display menos significativo
+    digitalWrite(digito,LOW);
+    digitalWrite(digito+1,HIGH);
+    digitalWrite(digito+2,HIGH);
+    digitalWrite(digito+3,HIGH);
+    }
+  else if (digito == primeira_porta+1){//2° display menos significativo
+    digitalWrite(digito-1,HIGH);
+    digitalWrite(digito,LOW);
+    digitalWrite(digito+1,HIGH);
+    digitalWrite(digito+2,HIGH);
+  }
+  else if (digito == primeira_porta+2){// 3° display menos significativo
+    digitalWrite(digito-2,HIGH);
+    digitalWrite(digito-1,HIGH);
+    digitalWrite(digito,LOW);
+    digitalWrite(digito+1,HIGH);
+  }
+  else if (digito == primeira_porta+3){// display mais significativo
+    digitalWrite(digito-3,HIGH);
+    digitalWrite(digito-2,HIGH);
+    digitalWrite(digito-1,HIGH);
+    digitalWrite(digito,LOW);
+  }
+}
+
 void DISPLAY7s::um(byte n0, byte n1, byte n2,byte n3){
   digitalWrite(n0, HIGH);
   digitalWrite(n1, LOW);
