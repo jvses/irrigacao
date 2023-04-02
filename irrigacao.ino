@@ -3,54 +3,25 @@
 #include "irrigacao_libs.h"
 
 
-//Botões e LEDs usados 
-#define led1 15 //A1
-#define led2 16 //A2
-#define botao1 17 //A3
-#define botao2 18 //A4
-#define rele   19 //A5
-
 
 //Controle dos disp7s
-#define b0 0
-#define b1 1
-#define b2 2
-#define b3 3
-#define trava 4
-#define d0 9
-#define d1 10
-#define d2 11
-#define d3 12
-#define botao 5
-
 DISPLAY7s dt;
-
+valvula torneira1;
 
 byte val=0;
 // o RTC usa os D{5,6,7}
-// Os display7s os D{0-4,8-14}
-// Isso usa todos os pinos daqui, Se eu quiser ter menos pinos posso abrir mão
-// dos pontos no Display7s tendo 4 livres
-
-
 
 void setup() {
   // put your setup code here, to run once:
   // checar RTC
   // setup e check dos Displays e botões
-    for(int i=0; i<5;i++)
-      pinMode(i, OUTPUT);
   
-  for(int i=9; i<13;i++){
-  pinMode(i, OUTPUT);
-  digitalWrite(i,LOW);
-  }
-  
-//  pinMode(botao,INPUT);
-  digitalWrite(trava, LOW);
-  // piscar os Leds
-  // checar torneira
+  dt.setup_displays(); //seta os pinos para exibição dos displays
+// essa função setup dos leds já deixam todos os displays acionados pra ter a mesma saída
 
+  dt.test_displays(b0,b1,b2,b3);// pisca os displays exibindo os algarismos em espaços de 300ms
+  // checar torneira
+  torneira1.ConfCheck(rele);
 }
 
 void loop() {
