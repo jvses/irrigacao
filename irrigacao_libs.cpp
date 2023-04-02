@@ -1,6 +1,11 @@
 #include "irrigacao_libs.h"
 
 
+void wait(unsigned long int a){ 
+  unsigned long int inicio=millis();
+  while(millis()-inicio < a);
+  }
+
 //void DISPLAY7s::setup_displays(){
 //    for(int i=0; i<5;i++)
 //      pinMode(i, OUTPUT);

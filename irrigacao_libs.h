@@ -5,7 +5,7 @@
 //#include <Arduino.h>
 
 
-
+void wait(unsigned long int a);//função pra substituir a delay
 
 class DISPLAY7s {
   
