@@ -3,11 +3,65 @@
 //VARIÁVEIS GLOBAIS
 bool estado_valvulas = false;
 
+///////Controle dos botões//////////
+//PS: ainda não pensei em como fazer toda uma função pra controlar os botões em si
+// provavelmente vou ter que manter essa estrutura lógica para cada evento de entrada
+// para as rotinas de configuração. Mas ainda dá pra colocar tudo numa função só, só não sei
+// se consigo criar uma função geral pra coltrolar eles e usar ao longo do código
 
+bool rb=false,rbaux=false,rbEvent=false;
+bool lb=false,lbaux=false,lbEvent=false;
+
+unsigned long rb_hold, lb_hold;
+
+bool rb_pressed(){
+  
+  //estrutura pressionar botão
+  rb = digitalRead(rbot);
+  if(rb && rbaux == false){ //botão pressionado
+    rbEvent=true;
+    rbaux = true; // trava pra evitar debouncing
+  }
+  else if( !rb && rbaux == true)// botão despressionado
+    rbaux=false; //retira a trava pra permitir apertar de novo
+  
+}
+bool lb_pressed(){
+  
+  //estrutura pressionar botão
+  lb = digitalRead(lbot);
+  if(lb && lbaux == false){ //botão pressionado
+    lbaux = true; // trava pra evitar debouncing
+    //evento que deve ocorrer
+    lbEvent = true;
+  }
+  else if( !lb && lbaux == true) // botão despressionado
+    lbaux=false; //retira a trava pra permitir apertar de novo
+
+}
+
+
+///////Genéricas úteis///////
 void wait(unsigned long int a) {
   unsigned long int inicio = millis();
   while (millis() - inicio < a);
 }
+///////Botões e LEDS/////////
+void bot_leds_setup() {
+  pinMode(vermelho, OUTPUT);
+  pinMode(verde, OUTPUT);
+  digitalWrite(vermelho, HIGH);
+  digitalWrite(verde, HIGH);
+  wait(500);
+  digitalWrite(vermelho, LOW);
+  digitalWrite(verde, LOW);
+  pinMode(rbot, INPUT);
+  pinMode(lbot, INPUT);
+}
+
+
+
+/////////// Válvulas /////////////////
 void valvula::ConfCheck(byte porta_rele) {
   pinMode(porta_rele, OUTPUT);
   digitalWrite(porta_rele, HIGH);
@@ -22,9 +76,7 @@ void valvula::turn_on_off(bool enable, byte porta_rele) {
 
 }
 
-
-
-
+/////////Display /////////
 void DISPLAY7s::setup_displays() {
   for (byte i = 0; i < 5; i++)
     pinMode(i, OUTPUT);

@@ -25,12 +25,14 @@
 #define lbot 18 //A4 (botão esquerdo)
 #define rele   19 //A5 (torneira)
 
+#define holdtime 3000 // constante de ms pra entrar em rotinas de configurações
+
 /////// As variáveis globais não são aceitas aqui. Elas estão no .cpp da biblioteca ///////
 
 
 // deixei algumas funções úteis que independem de objeto  pra ficarem aqui
 void wait(unsigned long int a);//função pra substituir a delay
-
+void bot_leds_setup();
 
 
 // classe para torneira
