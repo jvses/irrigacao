@@ -1,5 +1,4 @@
-// #include <RTClib.h>
-
+#include <RTClib.h>
 #include "irrigacao_libs.h"
 
 

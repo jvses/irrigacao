@@ -7,20 +7,20 @@
 
 ///////CONSTANTES NOMEADAS PARA USAR
 //Os Bs determinam o valor numérico que vão aparecer no display
-#define b0 0 // bit menos significativo
-#define b1 1
-#define b2 2
-#define b3 3// bit mais significativo
-#define trava 4 // trava para controle do display com CD4511
+#define b0 6 // bit menos significativo
+#define b1 7
+#define b2 8
+#define b3 9// bit mais significativo
+#define trava 2 // trava para controle do display com CD4511
 // Os Ds determinam qual o display vai exibir o número
-#define d0 9 // display menos significativo
-#define d1 10
-#define d2 11
-#define d3 12 // display mais significativo
+#define d0 10 // display menos significativo
+#define d1 11
+#define d2 12
+#define d3 13 // display mais significativo
 
 //Botões e LEDS
-#define verde 15 //A1
-#define vermelho 16 //A2 
+#define vermelho 15 //A1 
+#define verde 16 //A2
 #define rbot 17 //A3 (botão direito)
 #define lbot 18 //A4 (botão esquerdo)
 #define rele   19 //A5 (torneira)
@@ -34,12 +34,20 @@
 void wait(unsigned long int a);//função pra substituir a delay
 void bot_leds_setup();
 
+///////Sistema de LEDS
+/* Verde, piscando vai indicar que está em rotina de seca, ou seja, irrigando.
+ * Verde aceso indica que está irrigando no momento
+ * Vermelho piscando indica que está em rotina de chuva, ou seja, não liga nada.
+ * 
+ * Vermelho aceso, indica que está em configuração antes de escolher qual
+ * 
+ */
 
 // classe para torneira
 class valvula { // nessa clase eu vou controlar as torneiras
   public:
-void ConfCheck(byte porta_rele);
-void turn_on_off(bool enable,byte porta_rele);
+    void ConfCheck(byte porta_rele);
+    void turn_on_off(bool enable, byte porta_rele);
 
 };
 
